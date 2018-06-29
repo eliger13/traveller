@@ -1,26 +1,35 @@
 <template>
   <q-page padding>
     <h4>{{ title }}</h4>
-    <q-field
-      icon="mail"
-      label="Email"
-      :error="$v.form.email.$error"
-      error-label="Please type a valid email"
-    >
-      <q-input type="email" v-model="form.email" @blur="$v.form.email.$touch" />
-    </q-field>
 
-    <q-field
-      icon="lock"
-      label="Password"
-      :error="$v.form.password.$error"
-      error-label="Please type a valid password"
-    >
-      <q-input type="password" v-model="form.password"
-               @blur="$v.form.password.$touch" @key.enter="submit"/>
-    </q-field>
+    <div class="group ">
 
-    <q-btn color="primary" @click="submit">Submit</q-btn>
+      <q-field
+        icon="mail"
+        :error="$v.form.email.$error"
+        error-label="Please type a valid email"
+      >
+        <q-input type="email" v-model="form.email" float-label="Email"
+                @blur="$v.form.email.$touch" />
+      </q-field>
+
+      <q-field
+        icon="lock"
+        :error="$v.form.password.$error"
+        error-label="Please type a valid password"
+      >
+        <q-input type="password" v-model="form.password"  float-label="Password"
+                 @blur="$v.form.password.$touch" @key.enter="submit"/>
+      </q-field>
+      <br/>
+      <p class="text-weight-medium text-center">Do you have and Acount?<br/>
+        <a href="/register"
+           class="link text-bold text-primary">Register for free</a>
+      </p>
+      <q-field class="text-center">
+        <q-btn color="primary" @click="submit">Login</q-btn>
+      </q-field>
+    </div>
   </q-page>
 </template>
 
@@ -62,5 +71,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+ .link {
+   text-decoration: none;
+ }
 </style>
