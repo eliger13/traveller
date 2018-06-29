@@ -15,6 +15,14 @@ export default [
     ],
   },
 
+  {
+    path: '/register',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/register') },
+    ],
+  },
+
   { // Always leave this as last one
     path: '*',
     component: () => import('pages/404'),
