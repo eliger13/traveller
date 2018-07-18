@@ -122,6 +122,7 @@
             />
           </q-item-main>
         </q-item>
+
         <q-item>
           <q-item-side icon="update" />
           <q-item-main>
