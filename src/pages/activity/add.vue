@@ -4,7 +4,7 @@
 
     <div class="group ">
       <q-field>
-      <q-select float-label="Activity"
+      <q-select float-label="Category"
         v-model="form.category"
         :options="[
         {
@@ -26,7 +26,7 @@
       </q-field>
 
       <q-field
-        icon="mail"
+        icon="terrain"
         :error="$v.form.activity.$error"
         error-label="Please type a valid activity"
       >
@@ -35,7 +35,7 @@
       </q-field>
 
       <q-field
-        icon="mail"
+        icon="assignment_ind"
         :error="$v.form.host.$error"
         error-label="Please type a valid host"
       >
@@ -44,7 +44,7 @@
       </q-field>
 
       <q-field
-        icon="mail"
+        icon="place"
         :error="$v.form.address.$error"
         error-label="Please type a valid address"
       >
@@ -53,7 +53,7 @@
       </q-field>
 
       <q-field>
-      <q-select float-label="Country"
+      <q-select icon="" float-label="Country"
         v-model="form.country"
         :options="[
         {
@@ -75,7 +75,7 @@
       </q-field>
 
        <q-field
-        icon="mail"
+        icon="translate"
         :error="$v.form.language.$error"
         error-label="Please type a valid language"
       >
@@ -85,6 +85,7 @@
 
       <q-field>
         <q-input
+          icon="message"
           v-model="form.description"
           type="textarea"
           float-label="Description"
@@ -100,9 +101,10 @@
 
       <q-field>
         <q-input
+          icon="message"
           v-model="form.requirements"
           type="textarea"
-          float-label="requirements"
+          float-label="Requirements"
           :max-height="100"
           rows="7"
         />
@@ -111,25 +113,40 @@
       <q-list>
         <q-list-header>Schedule </q-list-header>
         <q-item>
-        <q-item-side icon="update" />
-        <q-item-main>
-        <q-datetime v-model="form.schedule.start" type="time"
-                    float-label="Start"/>
-        </q-item-main>
+          <q-item-side icon="date_range" />
+          <q-item-main>
+            <q-select multiple
+              float-label="Days"
+              v-model="form.schedule.daysOfWeek"
+              :options="listDaysOfWeek"
+            />
+          </q-item-main>
         </q-item>
         <q-item>
-        <q-item-side icon="update"/>
-        <q-item-main>
-        <q-datetime v-model="form.schedule.end" type="time"
-                    float-label="End"/>
-        </q-item-main>
+          <q-item-side icon="update" />
+          <q-item-main>
+            <q-datetime v-model="form.schedule.start" type="time"
+                      float-label="Start"/>
+          </q-item-main>
+        </q-item>
+        <q-item>
+          <q-item-side icon="update"/>
+          <q-item-main>
+          <q-datetime v-model="form.schedule.end" type="time"
+                     float-label="End"/>
+          </q-item-main>
         </q-item>
       </q-list>
 
+      <q-field>
+        <q-uploader :url="url" float-label="Download Photo" v-model="form.photos"
+        />
+      </q-field>
+
       <br/>
       <q-field class="text-center">
-        <q-btn color="primary" @click="submit">Submit</q-btn>_
-        <q-btn color="negative" @click="submit">Cancel</q-btn>
+        <q-btn  rounded push color="primary" @click="submit">Submit</q-btn>
+        <q-btn  rounded push color="negative" @click="submit">Cancel</q-btn>
       </q-field>
     </div>
   </q-page>
@@ -153,11 +170,43 @@ export default {
         price: '',
         requirements: '',
         schedule: {
+          daysOfWeek: [],
           start: '',
           end: '',
         },
         photos: '',
       },
+      url: '',
+      listDaysOfWeek: [
+        {
+          label: 'Lunes',
+          value: 1,
+        },
+        {
+          label: 'Martes',
+          value: 2,
+        },
+        {
+          label: 'Miercoles',
+          value: 3,
+        },
+        {
+          label: 'Jueves',
+          value: 4,
+        },
+        {
+          label: 'Viernes',
+          value: 5,
+        },
+        {
+          label: 'Sabado',
+          value: 6,
+        },
+        {
+          label: 'Domingo',
+          value: 7,
+        },
+      ],
     };
   },
 

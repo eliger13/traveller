@@ -42,7 +42,8 @@
       </q-field>
       <br/>
       <q-field class="text-center">
-        <q-btn color="primary" @click="submit">Register</q-btn>
+        <q-btn color="primary" @click="submit"> Register
+        </q-btn>
       </q-field>
   </div>
 
@@ -85,6 +86,8 @@ export default {
           message: 'Login successfully.',
           type: 'positive',
         });
+
+        this.$router.push('/add');
       }
     },
   },
