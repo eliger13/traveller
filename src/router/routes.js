@@ -30,8 +30,8 @@ export default [
       { path: '/add', component: () => import('pages/activity/add') },
       { path: '/delete', component: () => import('pages/activity/delete') },
       { path: '/list', component: () => import('pages/activity/list') },
-      { path: '/modify', componet: () => import('pages/activity/modify') },
       { path: '/view', component: () => import('pages/activity/view') },
+      { path: '/edit', component: () => import('pages/activity/edit') },
     ],
   },
 
