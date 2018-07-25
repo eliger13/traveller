@@ -2,7 +2,7 @@
   <q-page padding>
    <h4>{{ title }}</h4>
 
-    <div class="group ">
+    <div class="group">
       <q-field icon="photo_album">
         <q-select
           float-label="Category"
@@ -132,31 +132,32 @@
 
 <script>
 import { required, minLength, maxLength } from 'vuelidate/lib/validators';
+import { date } from 'quasar';
 
 export default {
   data() {
     return {
-      title: 'Create Activity',
+      title: 'Modify Activity',
       form: {
         category: {
-          typeCategory: [],
+          typeCategory: 'nature',
         },
-        activity: '',
-        host: '',
-        address: '',
+        activity: 'Montañismo',
+        host: 'Sho',
+        address: 'Av 9 de julio',
         country: {
-          localCountry: [],
+          localCountry: 'asia',
         },
         language: {
-          languages: [],
+          languages: ['ing', 'esp', 'portu'],
         },
-        description: '',
-        price: '',
-        requirements: '',
+        description: 'lalalala',
+        price: '500',
+        requirements: 'ser mayor de edad',
         schedule: {
-          daysOfWeek: [],
-          start: '',
-          end: '',
+          daysOfWeek: [1, 2, 3, 4, 5, 6, 7],
+          start: date.buildDate({ hours: 10, minutes: 0 }),
+          end: date.buildDate({ hours: 15, minutes: 45 }),
         },
         photos: '',
       },
@@ -289,12 +290,13 @@ export default {
           type: 'positive',
         });
 
-        this.$router.push('/view');
+        this.$router.push('/list');
       }
     },
     cancelAction() {
       this.$v.$touch();
       this.$q.notify('Cancelled');
+      this.$router.push('/view');
     },
   },
 };

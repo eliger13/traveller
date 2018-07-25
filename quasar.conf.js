@@ -61,10 +61,13 @@ module.exports = function (ctx) {
         'QInput',
         'QSelect',
         'QDatetime',
-        'QUploader'
+        'QUploader',
+        'QItemSeparator',
+        'QItemTile'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [
