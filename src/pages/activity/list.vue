@@ -2,285 +2,129 @@
   <q-page padding>
    <h4>{{ title }}</h4>
 
-    <div class="group">
-      <q-field icon="photo_album">
-        <q-select
-          float-label="Category"
-          v-model="form.category.typeCategory"
-          :options="categories"/>
-      </q-field>
+    <q-table
+      :data="tableData"
+      :columns="columns"
+      selection="multiple"
+      :selected.sync="selectedSecond"
+      row-key="__index"
+      color="secondary"
+      title="Select some Activity">
+      <template slot="top-selection" slot-scope="props">
+        <div class="col" />
+        <q-btn color="negative" flat round delete icon="delete" @click="deleteRow" />
+      </template>
 
-      <q-field
-        icon="terrain"
-        :error="$v.form.activity.$error"
-        error-label="Please type a valid activity"
-        >
-        <q-input
-          v-model="form.activity"
-          float-label="Activity"
-          @blur="$v.form.activity.$touch"/>
-      </q-field>
+      <template slot="body" slot-scope="props">
+        <q-tr :props="props"
+              @click.native="rowClick(props.row)" class="cursor-pointer">
+          <q-td auto-width>
+            <q-checkbox color="primary" v-model="props.selected" />
+          </q-td>
+          <q-td v-for="col in props.cols" :key="col.name">
+            {{ col.value }}
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
+    <q-action-sheet
+        v-model="actionSheet"
+        @ok="onOk"
+        :actions="action"
+    />
 
-      <q-field
-        icon="assignment_ind"
-        :error="$v.form.host.$error"
-        error-label="Please type a valid host"
-        >
-        <q-input
-          v-model="form.host"
-          float-label="Host"
-          @blur="$v.form.host.$touch" />
-      </q-field>
+    <br/>
+    <q-field class="text-center">
+      <q-btn  rounded push color="primary" @click="submit">Submit</q-btn>
+      <q-btn  rounded push color="negative" @click="cancelAction">Cancel</q-btn>
+    </q-field>
 
-      <q-field
-        icon="place"
-        :error="$v.form.address.$error"
-        error-label="Please type a valid address"
-        >
-        <q-input
-          v-model="form.address"
-          float-label="Address"
-          @blur="$v.form.address.$touch" />
-      </q-field>
-
-      <q-field icon="outlined_flag">
-        <q-select
-          float-label="Country"
-          v-model="form.country.localCountry"
-          :options="countries"/>
-      </q-field>
-
-      <q-field icon="language">
-        <q-select multiple
-          float-label="Languages"
-          v-model="form.language.languages"
-          :options="listOfLanguages"/>
-      </q-field>
-
-      <q-field icon="description">
-        <q-input
-          v-model="form.description"
-          type="textarea"
-          float-label="Description"
-          :max-height="100"
-          rows="7"/>
-      </q-field>
-
-      <q-field icon="receipt">
-        <q-input
-          v-model="form.requirements"
-          type="textarea"
-          float-label="Requirements"
-          :max-height="100"
-          rows="7"/>
-      </q-field>
-
-      <q-field>
-        <q-input
-          v-model="form.price"
-          type="number"
-          prefix="$US"
-          float-label="Price"/>
-      </q-field>
-
-      <q-list>
-        <q-list-header>Schedule </q-list-header>
-        <q-item>
-          <q-item-side icon="date_range" />
-          <q-item-main>
-            <q-select multiple
-              float-label="Days"
-              v-model="form.schedule.daysOfWeek"
-              :options="listDaysOfWeek"/>
-          </q-item-main>
-        </q-item>
-
-        <q-item>
-          <q-item-side icon="update" />
-          <q-item-main>
-            <q-datetime
-              v-model="form.schedule.start"
-              type="time"
-              float-label="Start"/>
-          </q-item-main>
-        </q-item>
-
-        <q-item>
-          <q-item-side icon="update"/>
-          <q-item-main>
-            <q-datetime
-              v-model="form.schedule.end"
-              type="time"
-              float-label="End"/>
-          </q-item-main>
-        </q-item>
-      </q-list>
-
-      <q-field>
-        <q-uploader :url="url"
-          float-label="Download Photo"
-          v-model="form.photos"/>
-      </q-field>
-      <br/>
-      <q-field class="text-center">
-        <q-btn  rounded push color="primary" @click="submit">Submit</q-btn>
-        <q-btn  rounded push color="negative" @click="cancelAction">Cancel</q-btn>
-      </q-field>
-    </div>
   </q-page>
 </template>
 
 <script>
-import { required, minLength, maxLength } from 'vuelidate/lib/validators';
 
 export default {
   data() {
     return {
-      title: 'Create Activity',
-      form: {
-        category: {
-          typeCategory: [],
-        },
-        activity: '',
-        host: '',
-        address: '',
-        country: {
-          localCountry: [],
-        },
-        language: {
-          languages: [],
-        },
-        description: '',
-        price: '',
-        requirements: '',
-        schedule: {
-          daysOfWeek: [],
-          start: '',
-          end: '',
-        },
-        photos: '',
-      },
-      url: '',
-      categories: [
+      actionSheet: false,
+      selectedRow: {},
+      title: 'List Activities',
+      tableData: [
         {
-          label: 'Naturaleza',
-          value: 'nature',
+          activity: 'Surf',
+          category: 'Water X-Treme',
+          operator: 'Eliger Roa',
+          days: 'lunes, miercoles',
+          address: 'Onolulu',
         },
         {
-          label: 'Deportes Extremos',
-          value: 'Extrem',
-        },
-        {
-          label: 'Relax',
-          value: 'relax',
+          activity: 'Rappel',
+          category: 'X-Treme',
+          operator: 'Gabriel Diaz',
+          days: 'martes, miercoles',
+          address: 'Wikiwiki',
         },
       ],
-      countries: [
+      columns: [
         {
-          label: 'Asia',
-          value: 'asia',
+          name: 'activity',
+          label: 'Activity',
+          field: 'activity',
+          align: 'left',
         },
         {
-          label: 'America',
-          value: 'america',
+          name: 'category',
+          label: 'Category',
+          field: 'category',
+          align: 'left',
         },
         {
-          label: 'Africa',
-          value: 'africa',
+          name: 'operator',
+          label: 'Operator',
+          field: 'operator',
+          align: 'left',
         },
         {
-          label: 'Europe',
-          value: 'europe',
+          name: 'days',
+          label: 'Days',
+          field: 'days',
+          align: 'left',
         },
         {
-          label: 'Oceania',
-          value: 'oceania',
-        },
-      ],
-      listOfLanguages: [
-        {
-          label: 'Ingles',
-          value: 'Ing',
-        },
-        {
-          label: 'Español',
-          value: 'Esp',
-        },
-        {
-          label: 'Frances',
-          value: 'Fr',
-        },
-        {
-          label: 'Portugues',
-          value: 'Portu',
-        },
-        {
-          label: 'Mandarin',
-          value: 'Mand',
+          name: 'address',
+          label: 'address',
+          field: 'address',
+          align: 'left',
         },
       ],
-      listDaysOfWeek: [
+      selectedSecond: [],
+      action: [
         {
-          label: 'Lunes',
-          value: 1,
+          label: 'Delete',
+          icon: 'delete',
+          color: 'red',
+          handler: this.deleteAction,
         },
         {
-          label: 'Martes',
-          value: 2,
+          label: 'Share',
+          icon: 'share',
+          color: 'primary',
         },
         {
-          label: 'Miercoles',
-          value: 3,
+          label: 'Play',
+          icon: 'gamepad',
         },
         {
-          label: 'Jueves',
-          value: 4,
-        },
-        {
-          label: 'Viernes',
-          value: 5,
-        },
-        {
-          label: 'Sabado',
-          value: 6,
-        },
-        {
-          label: 'Domingo',
-          value: 7,
+          label: 'Favorite',
+          icon: 'favorite',
         },
       ],
     };
   },
 
-  validations: {
-    form: {
-      activity: { required, minLength: minLength(4) },
-      host: { required, minLength: minLength(8) },
-      address: { required, minLength: minLength(8) },
-      country: { required },
-      language: {},
-      description: {
-        required,
-        minLength: minLength(15),
-        maxLength: maxLength(512),
-      },
-      price: { required },
-      requirements: {
-        required,
-        minLength: minLength(15),
-        maxLength: maxLength(512),
-      },
-      schedule: {
-        start: { required },
-        end: { required },
-      },
-    },
-  },
-
   methods: {
     submit() {
-      this.$v.$touch();
-
       if (this.$v.form.$error) {
         this.$q.notify('Please review fields again.');
       } else {
@@ -295,6 +139,26 @@ export default {
     cancelAction() {
       this.$v.$touch();
       this.$q.notify('Cancelled');
+    },
+    deleteRow() {
+      this.$q.notify(`Deleting Activities: ${this.selectedSecond.map(e => e.activity).join(' - ')}`);
+    },
+    rowClick(row) {
+      this.selectedRow = row;
+      this.actionSheet = true;
+    },
+    deleteAction() {
+      this.$q.notify(`Deleting Activiy: ${this.selectedRow.activity}`);
+    },
+    onOk(item) {
+      if (item.handler) {
+        // if we've already triggered a handler
+        return;
+      }
+      this.$q.notify({
+        color: 'secondary',
+        message: `Clicked on "${item.label}"`,
+      });
     },
   },
 };
