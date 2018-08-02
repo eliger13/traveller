@@ -32,6 +32,7 @@ export default [
       { path: '/list', component: () => import('pages/activity/list') },
       { path: '/view', component: () => import('pages/activity/view') },
       { path: '/edit', component: () => import('pages/activity/edit') },
+      { path: '/booking', component: () => import('pages/activity/booking') },
     ],
   },
 
