@@ -73,7 +73,7 @@
             <q-item-side icon="monetization_on" />
             <q-item-main >
               <q-item-tile label> Price </q-item-tile>
-              <q-item-tile sublabel>US{{Price}}</q-item-tile>
+              <q-item-tile sublabel>US{{price}}</q-item-tile>
             </q-item-main>
           </q-item>
 
@@ -235,10 +235,6 @@ export default {
       ],
     };
   },
-
-  validations: {
-  },
-
   methods: {
     submit() {
       this.$router.push('/modify');
