@@ -17,7 +17,8 @@
 
       <template slot="body" slot-scope="props">
         <q-tr :props="props"
-              @click.native="rowClick(props.row)" class="cursor-pointer">
+              @click.native="rowClick(props.row)"
+              class="cursor-pointer">
           <q-td auto-width>
             <q-checkbox color="primary" v-model="props.selected" />
           </q-td>
@@ -30,15 +31,7 @@
     <q-action-sheet
         v-model="actionSheet"
         @ok="onOk"
-        :actions="action"
-    />
-
-    <br/>
-    <q-field class="text-center">
-      <q-btn  rounded push color="primary" @click="submit">Submit</q-btn>
-      <q-btn  rounded push color="negative" @click="cancelAction">Cancel</q-btn>
-    </q-field>
-
+        :actions="action"/>
   </q-page>
 </template>
 
@@ -54,14 +47,12 @@ export default {
         {
           activity: 'Surf',
           category: 'Water X-Treme',
-          operator: 'Eliger Roa',
           days: 'lunes, miercoles',
           address: 'Onolulu',
         },
         {
           activity: 'Rappel',
           category: 'X-Treme',
-          operator: 'Gabriel Diaz',
           days: 'martes, miercoles',
           address: 'Wikiwiki',
         },
@@ -80,12 +71,6 @@ export default {
           align: 'left',
         },
         {
-          name: 'operator',
-          label: 'Operator',
-          field: 'operator',
-          align: 'left',
-        },
-        {
           name: 'days',
           label: 'Days',
           field: 'days',
@@ -101,45 +86,28 @@ export default {
       selectedSecond: [],
       action: [
         {
+          label: 'View',
+          icon: 'art_track',
+          color: 'primary',
+          handler: this.viewAction,
+        },
+        {
+          label: 'Edit',
+          icon: 'edit',
+          color: 'primary',
+          handler: this.editAction,
+        },
+        {
           label: 'Delete',
           icon: 'delete',
           color: 'red',
           handler: this.deleteAction,
-        },
-        {
-          label: 'Share',
-          icon: 'share',
-          color: 'primary',
-        },
-        {
-          label: 'Play',
-          icon: 'gamepad',
-        },
-        {
-          label: 'Favorite',
-          icon: 'favorite',
         },
       ],
     };
   },
 
   methods: {
-    submit() {
-      if (this.$v.form.$error) {
-        this.$q.notify('Please review fields again.');
-      } else {
-        this.$q.notify({
-          message: 'Login successfully.',
-          type: 'positive',
-        });
-
-        this.$router.push('/view');
-      }
-    },
-    cancelAction() {
-      this.$v.$touch();
-      this.$q.notify('Cancelled');
-    },
     deleteRow() {
       this.$q.notify(`Deleting Activities: ${this.selectedSecond.map(e => e.activity).join(' - ')}`);
     },
@@ -148,17 +116,24 @@ export default {
       this.actionSheet = true;
     },
     deleteAction() {
-      this.$q.notify(`Deleting Activiy: ${this.selectedRow.activity}`);
+      this.$q.notify(`Deleting Activity: ${this.selectedRow.activity}`);
     },
-    onOk(item) {
-      if (item.handler) {
-        // if we've already triggered a handler
-        return;
-      }
+    viewAction() {
       this.$q.notify({
         color: 'secondary',
-        message: `Clicked on "${item.label}"`,
+        message: `Clicked on "${this.selectedRow.activity}"`,
       });
+      this.$router.push('/view');
+    },
+    editAction() {
+      this.$q.notify({
+        color: 'secondary',
+        message: `Clicked on "${this.selectedRow.activity}"`,
+      });
+      this.$router.push('/edit');
+    },
+    onOk(item) {
+      return item.handler;
     },
   },
 };
