@@ -24,6 +24,15 @@ export default [
   },
 
   {
+    path: '/profile',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '/modify', component: () => import('pages/profile/modify') },
+      { path: '/viewP', component: () => import('pages/profile/viewP') },
+    ],
+  },
+
+  {
     path: '/activity',
     component: () => import('layouts/default'),
     children: [
