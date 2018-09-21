@@ -9,7 +9,7 @@
       :selected.sync="selectedSecond"
       row-key="__index"
       color="secondary"
-      title="Select some Activity">
+      title="Select some Activities">
       <template slot="top-selection" slot-scope="props">
         <div class="col" />
         <q-btn color="negative" flat round delete icon="delete" @click="deleteRow" />
@@ -117,6 +117,17 @@ export default {
     },
     deleteAction() {
       this.$q.notify(`Deleting Activity: ${this.selectedRow.activity}`);
+      this.$q.dialog({
+        title: 'Confirm',
+        message: 'Are you sure to eliminate this list of activities?',
+        color: 'negative',
+        ok: 'Agree',
+        cancel: 'Disagree',
+      }).then(() => {
+        this.$q.notify('Agreed!');
+      }).catch(() => {
+        this.$q.notify('Disagreed');
+      });
     },
     viewAction() {
       this.$q.notify({
