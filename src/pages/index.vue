@@ -1,6 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
+  <q-page>
+    <calendar
+      :eventArray="booking" />
   </q-page>
 </template>
 
@@ -8,7 +9,42 @@
 </style>
 
 <script>
+import { Calendar } from 'quasar-calendar';
+
 export default {
-  name: 'PageIndex',
+  components: {
+    calendar: Calendar,
+  },
+  data() {
+    return {
+      booking: [
+        {
+          id: 1,
+          summary: 'Test event',
+          description: 'Some extra info goes here',
+          location: '1232 Main St., Denver, CO',
+          start: {
+            dateTime: '2018-09-21T14:00:00',
+            timeZone: 'America/New_York',
+          },
+          end: {
+            dateTime: '2018-09-21T16:30:00',
+            timeZone: 'American/New_York',
+          },
+          color: 'positive',
+          attendees: [
+            {
+              id: 5,
+              email: 'somebody@somewhere.com',
+              displayName: 'John Q. Public',
+              organizer: false,
+              self: false,
+              resource: false,
+            },
+          ],
+        },
+      ],
+    };
+  },
 };
 </script>
