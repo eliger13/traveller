@@ -4,7 +4,7 @@
 
     <div class="group">
       <q-field icon="photo_album">
-        <q-select
+        <q-select radio
           float-label="Category"
           v-model="form.category.typeCategory"
           :options="categories"/>
