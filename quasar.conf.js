@@ -72,11 +72,11 @@ module.exports = function (ctx) {
         'QTableColumns',
         'QActionSheet',
         'QRadio',
+        'QDialog',
         'QModal'
       ],
       directives: [
-        'Ripple',
-        'CloseOverlay'
+        'Ripple'
       ],
       // Quasar plugins
       plugins: [

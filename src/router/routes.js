@@ -24,24 +24,24 @@ export default [
   },
 
   {
-    path: '/profile',
+    path: '/profile/',
     component: () => import('layouts/default'),
     children: [
-      { path: '/modify', component: () => import('pages/profile/modify') },
-      { path: '/viewP', component: () => import('pages/profile/viewP') },
+      { path: 'modify/', component: () => import('pages/profile/modify') },
+      { path: 'view/', component: () => import('pages/profile/view') },
     ],
   },
 
   {
-    path: '/activity',
+    path: '/activity/',
     component: () => import('layouts/default'),
     children: [
-      { path: '/add', component: () => import('pages/activity/add') },
-      { path: '/delete', component: () => import('pages/activity/delete') },
-      { path: '/list', component: () => import('pages/activity/list') },
-      { path: '/view', component: () => import('pages/activity/view') },
-      { path: '/edit', component: () => import('pages/activity/edit') },
-      { path: '/booking', component: () => import('pages/activity/booking') },
+      { path: 'add/', component: () => import('pages/activity/add') },
+      { path: 'delete/', component: () => import('pages/activity/delete') },
+      { path: 'list/', component: () => import('pages/activity/list') },
+      { path: 'view/', component: () => import('pages/activity/view') },
+      { path: 'edit/', component: () => import('pages/activity/edit') },
+      { path: 'booking/', component: () => import('pages/activity/booking') },
     ],
   },
 

@@ -237,7 +237,7 @@ export default {
   },
   methods: {
     submit() {
-      this.$router.push('/edit');
+      this.$router.push('/activity/edit/');
     },
   },
 };

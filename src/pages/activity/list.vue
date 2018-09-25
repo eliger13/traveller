@@ -134,14 +134,14 @@ export default {
         color: 'secondary',
         message: `Clicked on "${this.selectedRow.activity}"`,
       });
-      this.$router.push('/view');
+      this.$router.push('/activity/view/');
     },
     editAction() {
       this.$q.notify({
         color: 'secondary',
         message: `Clicked on "${this.selectedRow.activity}"`,
       });
-      this.$router.push('/edit');
+      this.$router.push('/activity/edit/');
     },
     onOk(item) {
       return item.handler;

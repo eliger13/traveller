@@ -49,15 +49,15 @@
             <q-item-side icon="person" />
             <q-item-main >
               <q-item-tile label> Gender </q-item-tile>
-              <q-item-tile sublabel>{{ form.gender }}</q-item-tile>
+              <q-item-tile sublabel>{{ form.gender.listOfGenders }}</q-item-tile>
             </q-item-main>
           </q-item>
 
-            <q-field icon="photo_camera">
-              <q-uploader :url="url"
+          <!--q-field icon="photo_camera">
+            <q-uploader :url="url"
               float-label="Download Photo"
               v-model="form.photos"/>
-            </q-field>
+          </q-field-->
 
       </q-list>
 
@@ -80,7 +80,7 @@ export default {
         email: 'traveleando@email.com',
         phone: 0,
         birth: 0,
-        gender: [],
+        gender: 'm',
         address: 'caba',
       },
       url: '',
@@ -99,7 +99,7 @@ export default {
 
   methods: {
     submit() {
-      this.$router.push('/modify');
+      this.$router.push('/profile/modify/');
     },
   },
 };

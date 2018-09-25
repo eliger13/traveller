@@ -1,7 +1,11 @@
 <template>
-  <q-page>
+  <q-page padding>
+      <h4>{{ title }}</h4>
+
+  <div>
     <calendar
       :eventArray="booking" />
+  </div>
   </q-page>
 </template>
 
@@ -17,10 +21,11 @@ export default {
   },
   data() {
     return {
+      title: 'Booking Calendar',
       booking: [
         {
           id: 1,
-          summary: 'Test event',
+          summary: 'Surf',
           description: 'Some extra info goes here',
           location: '1232 Main St., Denver, CO',
           start: {

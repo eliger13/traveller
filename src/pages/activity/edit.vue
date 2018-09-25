@@ -6,15 +6,14 @@
       <q-field icon="photo_album">
         <q-select radio
           float-label="Category"
-          v-model="form.category.typeCategory"
+          v-model="form.category"
           :options="categories"/>
       </q-field>
 
       <q-field
         icon="terrain"
         :error="$v.form.activity.$error"
-        error-label="Please type a valid activity"
-        >
+        error-label="Please type a valid activity">
         <q-input
           v-model="form.activity"
           float-label="Activity"
@@ -24,8 +23,7 @@
       <q-field
         icon="assignment_ind"
         :error="$v.form.host.$error"
-        error-label="Please type a valid host"
-        >
+        error-label="Please type a valid host">
         <q-input
           v-model="form.host"
           float-label="Host"
@@ -35,8 +33,7 @@
       <q-field
         icon="place"
         :error="$v.form.address.$error"
-        error-label="Please type a valid address"
-        >
+        error-label="Please type a valid address">
         <q-input
           v-model="form.address"
           float-label="Address"
@@ -46,14 +43,14 @@
       <q-field icon="outlined_flag">
         <q-select
           float-label="Country"
-          v-model="form.country.localCountry"
+          v-model="form.country"
           :options="countries"/>
       </q-field>
 
       <q-field icon="language">
         <q-select multiple
           float-label="Languages"
-          v-model="form.language.languages"
+          v-model="form.language"
           :options="listOfLanguages"/>
       </q-field>
 
@@ -117,7 +114,7 @@
       </q-list>
 
       <q-field>
-        <q-uploader :url="url"
+        <q-uploader multiple :url="url"
           float-label="Download Photo"
           v-model="form.photos"/>
       </q-field>
@@ -139,18 +136,12 @@ export default {
     return {
       title: 'Modify Activity',
       form: {
-        category: {
-          typeCategory: 'nature',
-        },
+        category: 'nature',
         activity: 'Montañismo',
         host: 'Sho',
         address: 'Av 9 de julio',
-        country: {
-          localCountry: 'asia',
-        },
-        language: {
-          languages: ['ing', 'esp', 'portu'],
-        },
+        country: 'asia',
+        language: ['ing', 'esp', 'portu'],
         description: 'lalalala',
         price: '500',
         requirements: 'ser mayor de edad',
@@ -290,13 +281,13 @@ export default {
           type: 'positive',
         });
 
-        this.$router.push('/list');
+        this.$router.push('/activity/list/');
       }
     },
     cancelAction() {
       this.$v.$touch();
       this.$q.notify('Cancelled');
-      this.$router.push('/view');
+      this.$router.push('activity/view/');
     },
   },
 };

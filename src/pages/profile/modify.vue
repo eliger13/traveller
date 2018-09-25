@@ -2,77 +2,79 @@
   <q-page padding>
     <h4>{{ title }}</h4>
 
-  <div class="group ">
+  <!--div class="center">
+    <q-field icon="photo_camera">
+      <q-item-side avatar="/PC/Pictures" />
+      <q-uploader :url="url" v-model="form.photos"/>
+    </q-field>
+  </div-->
 
-      <q-field
-        icon="person"
-        :error="$v.form.name.$error"
-        error-label="Please type a valid Full Name">
-          <q-input type="text"
-                  v-model="form.name"
-                  float-label="Full Name"
-                  @blur="$v.form.name.$touch" />
-      </q-field>
+  <div class="group">
 
-      <q-field
-        icon="mail"
-        :error="$v.form.email.$error"
-        error-label="Please type a valid email">
-          <q-input type="email"
-                  v-model="form.email"
-                  float-label="Email"
-                  @blur="$v.form.email.$touch" />
-      </q-field>
+    <q-field icon="person"
+      :error="$v.form.name.$error"
+      error-label="Please type a valid Full Name">
+        <q-input type="text"
+          v-model="form.name"
+          float-label="Full Name"
+          @blur="$v.form.name.$touch" />
+    </q-field>
 
-      <q-field
-        icon="local_phone"
-        :error="$v.form.phone.$error"
-        error-label="Please type a valid telepone">
+    <q-field icon="mail"
+      :error="$v.form.email.$error"
+      error-label="Please type a valid email">
+        <q-input type="email"
+          v-model="form.email"
+          float-label="Email"
+          @blur="$v.form.email.$touch" />
+    </q-field>
+
+    <q-field icon="local_phone"
+      :error="$v.form.phone.$error"
+      error-label="Please type a valid telepone">
         <q-input type="number"
-                v-model="form.phone"
-                float-label="Telephone"
-                @blur="$v.form.phone.$touch" />
+          v-model="form.phone"
+          float-label="Telephone"
+          @blur="$v.form.phone.$touch" />
       </q-field>
 
-      <q-field
-        icon="cake"
-        :error="$v.form.birth.$error"
-        error-label="Please type a valid Birthday">
+      <q-field icon="cake">
           <q-datetime type="date"
-                      v-model="form.birth"
-                      float-label="Birthday"
-                      @blur="$v.form.phone.$touch" />
+            v-model="form.birth"
+            float-label="Birthday"
+            @blur="$v.form.phone.$touch" />
       </q-field>
 
       <q-field icon="person">
-          <q-select radio
-                    v-model="form.gender.genders"
-                    float-label="Gender"
-                    :options="listOfGenders"/>
+        <q-select radio
+          v-model="form.gender.genders"
+          float-label="Gender"
+          :options="listOfGenders"/>
       </q-field>
 
-      <q-field
-        icon="place"
+      <q-field icon="place"
         :error="$v.form.address.$error"
         error-label="Please type a valid Address">
           <q-input type="text"
-                  v-model="form.address"
-                  float-label="Address"
-                  @blur="$v.form.address.$touch" />
+            v-model="form.address"
+            float-label="Address"
+            @blur="$v.form.address.$touch" />
       </q-field>
 
-      <q-field icon="photo_camera">
-        <q-uploader :url="url"
-          float-label="Download Photo"
-          v-model="form.photos"/>
+     <q-field icon="lock">
+        <q-input type="password"
+          v-model="form.password"
+          float-label="Password"
+          :no-pass-toggle="true"
+          @click="changePassword"/>
       </q-field>
-
-      <q-modal v-model="opened" float-label="Password">
-        <h6>Password</h6>
-        <q-btn color="primary"
-            @click="opened"
+        <q-modal v-model="opened">
+          <h4>Basic Modal</h4>
+          <q-btn
+            color="primary"
+            @click="opened = false"
             label="Close"/>
-      </q-modal>
+        </q-modal>
 
       <br/>
       <q-field class="text-center">
@@ -92,14 +94,15 @@ export default {
       title: 'Person Profile',
       opened: false,
       form: {
-        name: '',
+        name: 'Gabriel Diaz',
         email: '',
         phone: '',
         birth: '',
         gender: {
-          genders: ['f', 'm'],
+          genders: 'm',
         },
         address: '',
+        password: ' travellerando',
       },
       url: '',
       listOfGenders: [
@@ -120,15 +123,19 @@ export default {
       name: { required, minLength: minLength(7) },
       email: { required, email },
       phone: { required, minLength: minLength(8) },
-      birth: { required },
+      birth: { },
       gender: { },
       address: { required, minLength: minLength(8) },
+      password: { required, minLength: minLength(8) },
     },
   },
 
   methods: {
     submit() {
-      this.$router.push('/viewP');
+      this.$router.push('/profile/view/');
+    },
+    changePassword() {
+      this.opened = true;
     },
   },
 };

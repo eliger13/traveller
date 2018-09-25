@@ -39,26 +39,30 @@
         </q-item>
         <q-item-separator/>
 
-        <q-item @click.native="$router.push('/viewP')">
+        <q-item @click.native="$router.push('/profile/view/')">
           <q-item-side icon="person" />
           <q-item-main label="Profile" sublabel="" />
         </q-item>
 
-        <q-item @click.native="$router.push('/list')">
+        <q-item @click.native="$router.push('/activity/list/')">
           <q-item-side icon="terrain" />
           <q-item-main label="Activities" sublabel="" />
         </q-item>
 
-        <q-item @click.native="$router.push('/booking')">
+        <q-item @click.native="$router.push('/activity/booking/')">
           <q-item-side icon="today" />
           <q-item-main label="Bookings" sublabel="" />
         </q-item>
 
-        <q-item @click.native="$router.push('/login')">
-          <q-item-side icon="power_settings_new" />
-          <q-item-main label="Sign off" sublabel="" />
+        <q-item @click.native="$router.push('/')">
+          <q-item-side icon="insert_chart_outlined" />
+          <q-item-main label="Revenue Report" sublabel="" />
         </q-item>
 
+        <q-item @click.native="$router.push('/login')">
+          <q-item-side icon="power_settings_new" />
+          <q-item-main label="Logout" sublabel="" />
+        </q-item>
       </q-list>
     </q-layout-drawer>
 

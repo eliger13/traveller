@@ -6,7 +6,7 @@
       <q-field icon="photo_album">
         <q-select radio
           float-label="Category"
-          v-model="form.category.typeCategory"
+          v-model="form.category"
           :options="categories"/>
       </q-field>
 
@@ -46,14 +46,14 @@
       <q-field icon="outlined_flag">
         <q-select
           float-label="Country"
-          v-model="form.country.localCountry"
+          v-model="form.country"
           :options="countries"/>
       </q-field>
 
       <q-field icon="language">
         <q-select multiple
           float-label="Languages"
-          v-model="form.language.languages"
+          v-model="form.language"
           :options="listOfLanguages"/>
       </q-field>
 
@@ -117,7 +117,7 @@
       </q-list>
 
       <q-field>
-        <q-uploader :url="url"
+        <q-uploader multiple :url="url"
           float-label="Download Photo"
           v-model="form.photos"/>
       </q-field>
@@ -138,18 +138,12 @@ export default {
     return {
       title: 'Create Activity',
       form: {
-        category: {
-          typeCategory: [],
-        },
+        category: [],
         activity: '',
         host: '',
         address: '',
-        country: {
-          localCountry: [],
-        },
-        language: {
-          languages: [],
-        },
+        country: [],
+        language: [],
         description: '',
         price: '',
         requirements: '',
@@ -289,7 +283,7 @@ export default {
           type: 'positive',
         });
 
-        this.$router.push('/view');
+        this.$router.push('/activity/view/');
       }
     },
     cancelAction() {
