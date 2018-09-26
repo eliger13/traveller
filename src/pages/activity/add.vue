@@ -3,11 +3,12 @@
    <h4>{{ title }}</h4>
 
     <div class="group ">
+
       <q-field icon="photo_album">
         <q-select radio
           float-label="Category"
           v-model="form.category"
-          :options="categories"/>
+          :options="categories" />
       </q-field>
 
       <q-field
@@ -47,14 +48,14 @@
         <q-select
           float-label="Country"
           v-model="form.country"
-          :options="countries"/>
+          :options="countries" />
       </q-field>
 
       <q-field icon="language">
         <q-select multiple
           float-label="Languages"
           v-model="form.language"
-          :options="listOfLanguages"/>
+          :options="listOfLanguages" />
       </q-field>
 
       <q-field icon="description">
@@ -63,7 +64,7 @@
           type="textarea"
           float-label="Description"
           :max-height="100"
-          rows="7"/>
+          rows="7" />
       </q-field>
 
       <q-field icon="receipt">
@@ -72,7 +73,7 @@
           type="textarea"
           float-label="Requirements"
           :max-height="100"
-          rows="7"/>
+          rows="7" />
       </q-field>
 
       <q-field>
@@ -80,7 +81,7 @@
           v-model="form.price"
           type="number"
           prefix="$US"
-          float-label="Price"/>
+          float-label="Price" />
       </q-field>
 
       <q-list>
@@ -91,7 +92,7 @@
             <q-select multiple
               float-label="Days"
               v-model="form.schedule.daysOfWeek"
-              :options="listDaysOfWeek"/>
+              :options="listDaysOfWeek" />
           </q-item-main>
         </q-item>
 
@@ -106,12 +107,12 @@
         </q-item>
 
         <q-item>
-          <q-item-side icon="update"/>
+          <q-item-side icon="update" />
           <q-item-main>
             <q-datetime
               v-model="form.schedule.end"
               type="time"
-              float-label="End"/>
+              float-label="End" />
           </q-item-main>
         </q-item>
       </q-list>
@@ -119,9 +120,11 @@
       <q-field>
         <q-uploader multiple :url="url"
           float-label="Download Photo"
-          v-model="form.photos"/>
+          v-model="form.photos" />
       </q-field>
+
       <br/>
+
       <q-field class="text-center">
         <q-btn  rounded push color="primary" @click="submit">Submit</q-btn>
         <q-btn  rounded push color="negative" @click="cancelAction">Cancel</q-btn>
@@ -289,6 +292,7 @@ export default {
     cancelAction() {
       this.$v.$touch();
       this.$q.notify('Cancelled');
+      this.$router.push('/activity/list/');
     },
   },
 };
