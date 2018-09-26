@@ -65,6 +65,7 @@ export default {
           message: 'Login successfully.',
           type: 'positive',
         });
+        this.$router.push('/');
       }
     },
   },
