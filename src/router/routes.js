@@ -24,6 +24,14 @@ export default [
   },
 
   {
+    path: '/settings',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/settings') },
+    ],
+  },
+
+  {
     path: '/profile/',
     component: () => import('layouts/default'),
     children: [
@@ -42,6 +50,7 @@ export default [
       { path: 'view/', component: () => import('pages/activity/view') },
       { path: 'edit/', component: () => import('pages/activity/edit') },
       { path: 'booking/', component: () => import('pages/activity/booking') },
+      { path: 'report/', component: () => import('pages/activity/report') },
     ],
   },
 
