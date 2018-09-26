@@ -138,13 +138,13 @@ export default {
       form: {
         category: 'nature',
         activity: 'Montañismo',
-        host: 'Sho',
+        host: 'jose maria',
         address: 'Av 9 de julio',
         country: 'asia',
         language: ['ing', 'esp', 'portu'],
-        description: 'lalalala',
+        description: 'lalalala jajajajajajajj',
         price: '500',
-        requirements: 'ser mayor de edad',
+        requirements: 'ser mayor de edad y haaaaaahahahaha',
         schedule: {
           daysOfWeek: [1, 2, 3, 4, 5, 6, 7],
           start: date.buildDate({ hours: 10, minutes: 0 }),
@@ -272,22 +272,21 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
-
       if (this.$v.form.$error) {
         this.$q.notify('Please review fields again.');
       } else {
         this.$q.notify({
-          message: 'Login successfully.',
+          message: 'Modify successfully.',
           type: 'positive',
         });
-
         this.$router.push('/activity/list/');
       }
     },
+
     cancelAction() {
       this.$v.$touch();
       this.$q.notify('Cancelled');
-      this.$router.push('activity/view/');
+      this.$router.push('/activity/view/');
     },
   },
 };
