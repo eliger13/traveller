@@ -73,7 +73,8 @@ module.exports = function (ctx) {
         'QActionSheet',
         'QRadio',
         'QDialog',
-        'QModal'
+        'QModal',
+        'QTooltip'
       ],
       directives: [
         'Ripple'
