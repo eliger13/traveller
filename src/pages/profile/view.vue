@@ -4,9 +4,13 @@
 
     <div class="row justify-center">
       <div class= "col-8">
+        <div class="justify-center row">
+          <img @click="tryImage" src="//i.stack.imgur.com/34AD2.jpg" />
+        </div>
+
         <q-list>
           <q-item>
-            <q-item-side icon="person" />
+            <q-item-side icon="person" color="primary"/>
             <q-item-main>
               <q-item-tile label> Full Name </q-item-tile>
               <q-item-tile sublabel>{{ form.name }}</q-item-tile>
@@ -14,7 +18,7 @@
           </q-item>
 
           <q-item>
-            <q-item-side icon="mail" />
+            <q-item-side icon="mail" color="primary"/>
             <q-item-main >
               <q-item-tile label> Email </q-item-tile>
               <q-item-tile sublabel>{{ form.email }}</q-item-tile>
@@ -22,15 +26,16 @@
           </q-item>
 
           <q-item>
-            <q-item-side icon="local_phone" />
+            <q-item-side icon="local_phone" color="primary"/>
             <q-item-main >
               <q-item-tile label> Telephone</q-item-tile>
               <q-item-tile sublabel>{{ form.phone }}</q-item-tile>
             </q-item-main>
           </q-item>
 
+          <q-item-separator inset />
           <q-item>
-            <q-item-side icon="place" />
+            <q-item-side icon="place" color="primary"/>
             <q-item-main >
               <q-item-tile label>Address </q-item-tile>
               <q-item-tile sublabel>{{ form.address }}</q-item-tile>
@@ -38,7 +43,7 @@
           </q-item>
 
           <q-item>
-            <q-item-side icon="cake" />
+            <q-item-side icon="cake" color="primary"/>
             <q-item-main >
               <q-item-tile label> Birthday </q-item-tile>
               <q-item-tile sublabel>{{ form.birth }}</q-item-tile>
@@ -46,10 +51,10 @@
           </q-item>
 
           <q-item>
-            <q-item-side icon="person" />
+            <q-item-side icon="wc" color="primary"/>
             <q-item-main >
               <q-item-tile label> Gender </q-item-tile>
-              <q-item-tile sublabel>{{ form.gender.listOfGenders }}</q-item-tile>
+              <q-item-tile sublabel>{{ getGenders() }}</q-item-tile>
             </q-item-main>
           </q-item>
 
@@ -63,7 +68,7 @@
 
       <br/>
         <q-field class="text-center">
-          <q-btn  rounded push color="primary" @click="submit">Modify</q-btn>
+          <q-btn  rounded push color="primary" @click="submit"> Modify </q-btn>
         </q-field>
     </div>
   </div>
@@ -80,11 +85,11 @@ export default {
         email: 'traveleando@email.com',
         phone: 0,
         birth: 0,
-        gender: 'm',
+        gender: 'f',
         address: 'caba',
       },
       url: '',
-      listOfGenders: [
+      genders: [
         {
           label: 'Female',
           value: 'f',
@@ -100,6 +105,17 @@ export default {
   methods: {
     submit() {
       this.$router.push('/profile/modify/');
+    },
+    getGenders() {
+      for (let i = 0; i < this.genders.length; i += 1) {
+        if (this.genders[i].value === this.form.gender) {
+          return this.genders[i].label;
+        }
+      }
+      return this.form.gender;
+    },
+    tryImage() {
+      console.log('xda');
     },
   },
 };
