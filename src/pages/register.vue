@@ -87,7 +87,7 @@ export default {
           type: 'positive',
         });
 
-        this.$router.push('/add');
+        this.$router.push('/');
       }
     },
   },
