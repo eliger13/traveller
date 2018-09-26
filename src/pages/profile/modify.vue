@@ -45,14 +45,14 @@
             @blur="$v.form.phone.$touch" />
       </q-field>
 
-      <q-field icon="person">
+      <q-field icon="wc">
         <q-select radio
           v-model="form.gender.genders"
           float-label="Gender"
           :options="listOfGenders"/>
       </q-field>
 
-      <q-field icon="place"
+      <q-field  icon="place"
         :error="$v.form.address.$error"
         error-label="Please type a valid Address">
           <q-input type="text"
@@ -61,20 +61,24 @@
             @blur="$v.form.address.$touch" />
       </q-field>
 
-     <q-field icon="lock">
+      <q-field icon="lock">
         <q-input type="password"
           v-model="form.password"
           float-label="Password"
           :no-pass-toggle="true"
           @click="changePassword"/>
+        <q-tooltip anchor="bottom middle" self="top right">
+          If you want to change the password click
+        </q-tooltip>
       </q-field>
-        <q-modal v-model="opened">
-          <h4>Basic Modal</h4>
-          <q-btn
-            color="primary"
-            @click="opened = false"
-            label="Close"/>
-        </q-modal>
+
+      <q-modal v-model="opened">
+        <h4></h4>
+        <q-btn
+          color="primary"
+          @click="opened = false"
+          label="Close"/>
+      </q-modal>
 
       <br/>
       <q-field class="text-center">
@@ -94,13 +98,11 @@ export default {
       title: 'Person Profile',
       opened: false,
       form: {
-        name: 'Gabriel Diaz',
+        name: '',
         email: '',
         phone: '',
         birth: '',
-        gender: {
-          genders: 'm',
-        },
+        gender: [],
         address: '',
         password: ' travellerando',
       },
@@ -132,8 +134,24 @@ export default {
 
   methods: {
     submit() {
+      this.$v.$touch();
+      if (this.$v.form.$error) {
+        this.$q.notify('Please review fields again.');
+      } else {
+        this.$q.notify({
+          message: 'Login successfully.',
+          type: 'positive',
+        });
+        this.$router.push('/profile/view/');
+      }
+    },
+
+    cancelAction() {
+      this.$v.$touch();
+      this.$q.notify('Cancelled');
       this.$router.push('/profile/view/');
     },
+
     changePassword() {
       this.opened = true;
     },
