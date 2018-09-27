@@ -27,7 +27,7 @@
            class="link text-bold text-primary">Register for free</a>
       </p>
       <q-field class="text-center">
-        <q-btn color="primary" @click="submit">Login</q-btn>
+        <q-btn rounded push color="primary" @click="submit">Login</q-btn>
       </q-field>
     </div>
   </q-page>

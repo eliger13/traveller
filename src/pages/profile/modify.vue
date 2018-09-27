@@ -2,14 +2,11 @@
   <q-page padding>
     <h4>{{ title }}</h4>
 
-  <!--div class="center">
-    <q-field icon="photo_camera">
-      <q-item-side avatar="/PC/Pictures" />
-      <q-uploader :url="url" v-model="form.photos"/>
-    </q-field>
-  </div-->
-
   <div class="group">
+
+    <div class="row justify-center">
+        <img @click.native="tryImage" src="//i.stack.imgur.com/34AD2.jpg" />
+    </div>
 
     <q-field icon="person"
       :error="$v.form.name.$error"
@@ -61,25 +58,6 @@
             @blur="$v.form.address.$touch" />
       </q-field>
 
-      <q-field icon="lock">
-        <q-input type="password"
-          v-model="form.password"
-          float-label="Password"
-          :no-pass-toggle="true"
-          @click="changePassword"/>
-        <q-tooltip anchor="bottom middle" self="top right">
-          If you want to change the password click
-        </q-tooltip>
-      </q-field>
-
-      <q-modal v-model="opened">
-        <h4></h4>
-        <q-btn
-          color="primary"
-          @click="opened = false"
-          label="Close"/>
-      </q-modal>
-
       <br/>
       <q-field class="text-center">
         <q-btn  rounded push color="primary" @click="submit">Submit</q-btn>
@@ -104,7 +82,6 @@ export default {
         birth: '',
         gender: [],
         address: '',
-        password: ' travellerando',
       },
       url: '',
       listOfGenders: [
@@ -128,7 +105,6 @@ export default {
       birth: { },
       gender: { },
       address: { required, minLength: minLength(8) },
-      password: { required, minLength: minLength(8) },
     },
   },
 
@@ -145,19 +121,26 @@ export default {
         this.$router.push('/profile/view/');
       }
     },
-
     cancelAction() {
       this.$v.$touch();
       this.$q.notify('Cancelled');
       this.$router.push('/profile/view/');
     },
+    tryImage() {
 
-    changePassword() {
-      this.opened = true;
     },
   },
 };
 </script>
 
 <style>
+img {
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
+}
+
+img:hover {
+  opacity: 0.5;
+}
 </style>

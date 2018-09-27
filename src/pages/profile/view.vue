@@ -5,9 +5,10 @@
     <div class="row justify-center">
       <div class= "col-8">
         <div class="justify-center row">
-          <img @click="tryImage" src="//i.stack.imgur.com/34AD2.jpg" />
+          <img src="//i.stack.imgur.com/34AD2.jpg" />
         </div>
 
+        <br />
         <q-list>
           <q-item>
             <q-item-side icon="person" color="primary"/>
@@ -28,7 +29,7 @@
           <q-item>
             <q-item-side icon="local_phone" color="primary"/>
             <q-item-main >
-              <q-item-tile label> Telephone</q-item-tile>
+              <q-item-tile label> Telephone </q-item-tile>
               <q-item-tile sublabel>{{ form.phone }}</q-item-tile>
             </q-item-main>
           </q-item>
@@ -57,13 +58,6 @@
               <q-item-tile sublabel>{{ getGenders() }}</q-item-tile>
             </q-item-main>
           </q-item>
-
-          <!--q-field icon="photo_camera">
-            <q-uploader :url="url"
-              float-label="Download Photo"
-              v-model="form.photos"/>
-          </q-field-->
-
       </q-list>
 
       <br/>
@@ -114,12 +108,14 @@ export default {
       }
       return this.form.gender;
     },
-    tryImage() {
-      console.log('xda');
-    },
   },
 };
 </script>
 
 <style>
+  img {
+    border-radius: 50%;
+    width: 20%;
+    height: 20%;
+}
 </style>

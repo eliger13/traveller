@@ -3,7 +3,7 @@
       <h4>{{ title }}</h4>
 
   <div>
-    <calendar
+    <calendar ref="calendar"
       :eventArray="booking" />
   </div>
   </q-page>
@@ -50,6 +50,9 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    this.$refs.calendar.$refs.fullCalendarTabs.selectTab('tab-agenda');
   },
 };
 </script>

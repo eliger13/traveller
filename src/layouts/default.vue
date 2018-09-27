@@ -54,12 +54,12 @@
           <q-item-main label="Bookings" />
         </q-item>
 
-        <q-item @click.native="$router.push('/report')">
+        <q-item @click.native="$router.push('/activity/report/')">
           <q-item-side icon="insert_chart_outlined" />
           <q-item-main label="Revenue Report" />
         </q-item>
 
-        <q-item @click.native="$router.push('/settings')">
+        <q-item @click.native="$router.push('/settings/setting/')">
           <q-item-side icon="settings" />
           <q-item-main label="Settings" />
         </q-item>

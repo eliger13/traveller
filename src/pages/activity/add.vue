@@ -3,7 +3,6 @@
    <h4>{{ title }}</h4>
 
     <div class="group ">
-
       <q-field icon="photo_album">
         <q-select radio
           float-label="Category"
@@ -11,8 +10,7 @@
           :options="categories" />
       </q-field>
 
-      <q-field
-        icon="terrain"
+      <q-field icon="terrain"
         :error="$v.form.activity.$error"
         error-label="Please type a valid activity"
         >
@@ -22,8 +20,7 @@
           @blur="$v.form.activity.$touch"/>
       </q-field>
 
-      <q-field
-        icon="assignment_ind"
+      <q-field icon="assignment_ind"
         :error="$v.form.host.$error"
         error-label="Please type a valid host"
         >
@@ -33,8 +30,7 @@
           @blur="$v.form.host.$touch" />
       </q-field>
 
-      <q-field
-        icon="place"
+      <q-field icon="place"
         :error="$v.form.address.$error"
         error-label="Please type a valid address"
         >
@@ -126,8 +122,8 @@
       <br/>
 
       <q-field class="text-center">
-        <q-btn  rounded push color="primary" @click="submit">Submit</q-btn>
-        <q-btn  rounded push color="negative" @click="cancelAction">Cancel</q-btn>
+        <q-btn rounded push color="primary" @click="submit">Submit</q-btn>
+        <q-btn rounded push color="negative" @click="cancelAction">Cancel</q-btn>
       </q-field>
     </div>
   </q-page>

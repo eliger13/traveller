@@ -24,10 +24,11 @@ export default [
   },
 
   {
-    path: '/settings',
+    path: '/settings/',
     component: () => import('layouts/default'),
     children: [
-      { path: '', component: () => import('pages/settings') },
+      { path: 'setting/', component: () => import('pages/settings/setting') },
+      { path: 'password/', component: () => import('pages/settings/password') },
     ],
   },
 

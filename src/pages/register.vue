@@ -42,7 +42,7 @@
       </q-field>
       <br/>
       <q-field class="text-center">
-        <q-btn color="primary" @click="submit"> Register
+        <q-btn rounded push color="primary" @click="submit"> Register
         </q-btn>
       </q-field>
   </div>
